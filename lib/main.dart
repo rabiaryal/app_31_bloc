@@ -1,5 +1,8 @@
+import 'package:app_31/bloc/favourite_app/favourite_app_bloc.dart';
 import 'package:app_31/bloc/imagepicker/imagepicker_bloc.dart';
 import 'package:app_31/bloc/switch/switch_bloc.dart';
+import 'package:app_31/repository/favourite_repository.dart';
+import 'package:app_31/ui/favourite_app/favourite_app_screen.dart';
 import 'package:app_31/ui/image%20picker/imagepicker.dart';
 import 'package:app_31/ui/switch/switchscreen.dart';
 import 'package:app_31/utils/imagepickerutils.dart';
@@ -25,14 +28,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ImagePickerBloc(ImagePickerUtils()),
         ),
+        BlocProvider(create: (_)=>FavouriteBloc(FavouriteRepository()))
       ],
       child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: ImagePicker()),
+        title: 'Flutter Demo',
+        themeMode: ThemeMode.dark,
+        theme: ThemeData(
+          useMaterial3: true,
+          brightness: Brightness.dark,
+        ),
+        home: FavouriteAppScreen(),
+      ),
     );
   }
 }

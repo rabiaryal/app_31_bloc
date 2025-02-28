@@ -1,5 +1,8 @@
+import 'package:app_31/bloc/imagepicker/imagepicker_bloc.dart';
 import 'package:app_31/bloc/switch/switch_bloc.dart';
+import 'package:app_31/ui/image%20picker/imagepicker.dart';
 import 'package:app_31/ui/switch/switchscreen.dart';
+import 'package:app_31/utils/imagepickerutils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,16 +17,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SwitchBloc(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => SwitchBloc(),
         ),
-        home: SwitchScreen(),
-      ),
+        BlocProvider(
+          create: (context) => ImagePickerBloc(ImagePickerUtils()),
+        ),
+      ],
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: ImagePicker()),
     );
   }
 }
